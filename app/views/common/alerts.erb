@@ -1,0 +1,20 @@
+<% if session.key?(:error) %>
+  <div class="row">
+    <div class="col-xs-12">
+      <div class="alert alert-danger alert-dismissable">
+        <button type="button" class="close" data-dismiss="alert" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+        <%= session.delete(:error) %>
+      </div>
+    </div>
+  </div>
+<% end %>
+<% if session.key?(:notice) %>
+  <div class="row">
+    <div class="col-xs-12">
+      <div class="alert alert-success alert-dismissable">
+        <button type="button" class="close" data-dismiss="alert" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+        <%= session.delete(:notice) %>
+      </div>
+    </div>
+  </div>
+<% end %>

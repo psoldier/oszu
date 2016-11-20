@@ -1,0 +1,44 @@
+<div class="row">
+  <div class="col-md-12 col-lg-12">
+    <h4>
+      Team
+    </h4>
+    <hr/>
+    <div class="col-md-6 col-lg-6 col-md-offset-1 col-lg-offset-1">
+      <div class="form-horizontal">
+        <div class="form-group">
+          <label class="col-md-3 col-lg-3 control-label">Name:</label>
+          <div class="col-md-9 col-lg-9">
+            <label class="control-label">
+              <%= team.name %>
+            </label>
+          </div>
+        </div>
+        <div class="form-group">
+          <label class="col-md-3 col-lg-3 control-label">Created At:</label>
+          <div class="col-md-9 col-lg-9">
+            <label class="control-label">
+              <%= admin_date_time_format(team.created_at, false) %>
+            </label>
+          </div>
+        </div>
+        <div class="form-group">
+          <label class="col-md-3 col-lg-3 control-label">Updated At:</label>
+          <div class="col-md-9 col-lg-9">
+            <label class="control-label">
+              <%= team.updated_at.nil? ? "-" : admin_date_time_format(team.updated_at, false) %>
+            </label>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+<hr/>
+<div class="row">
+  <div class="col-md-12 col-lg-12">
+    <a class="btn btn-primary" href="/teams">Back</a>
+    <a class="btn btn-success" href="/teams/<%= team.id %>/edit">Edit</a>
+  </div>
+</div>
+

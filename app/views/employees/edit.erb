@@ -1,0 +1,17 @@
+<div class="row">
+  <div class="col-md-12 col-lg-12">
+    <h4>
+      Team Edit
+    </h4>
+    <hr/>
+  </div>
+</div>
+<div class="row">
+  <div class="col-md-12 col-lg-12">
+    <form action="/teams/<%= team.id %>" class="form-horizontal" method="post">
+      <input name="_method" type="hidden" value="put"></input>
+      <%= partial :'admin/teams/form', team: team %>
+    </form>
+  </div>
+</div>
+

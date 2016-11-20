@@ -1,0 +1,18 @@
+<%= csrf.form_tag %>
+<div class="form-group">
+  <label class="col-sm-3 control-label" for="name">Name</label>
+  <div class="col-sm-5">
+    <input class="form-control" id="name" name="team[name]" required="<%= true %>" type="text" value="<%= team.name %>"></input>
+  </div>
+</div>
+<hr>
+  <div class="row">
+    <div class="col-md-12 col-lg-12">
+      <div class="pull-right">
+        <a class="btn btn-primary" href="/teams">Back</a>
+        <button class="btn btn-success" type="submit">Save</button>
+      </div>
+    </div>
+  </div>
+</hr>
+

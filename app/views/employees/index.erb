@@ -1,0 +1,115 @@
+<h3>
+  Employees
+</h3>
+<div class="row">
+  <div class="col-md-12 col-lg-12">
+    <div id="accordion" class="panel-group">
+      <div class="panel panel-default">
+        <div class="panel-heading">
+          <div class="row">
+            <div class="col-md-10 col-lg-10">
+              <a href="#collapseOne" data-toggle="collapse" data-parent="#accordion">
+                <i class="glyphicon glyphicon-filter"></i>Filters
+              </a>
+            </div>
+            <div class="col-md-2 col-lg-2">
+              <% unless filter.empty? %>
+                <a class="btn btn-danger btn-sm pull-right" href='/employees'>Clear</a>
+              <% end %>
+            </div>
+          </div>
+        </div>
+        <div id="collapseOne" class="panel-collapse collapse">
+          <div class="panel-body">
+            <form id="filter_form" action="/employees" class="form-horizontal">
+              <div class="row">
+                <div class="col-md-5 col-lg-5">
+                  <div class="form-group">
+                    <label class="col-sm-3 control-label" for="filter_name">Name</label>
+                    <div class="col-sm-9">
+                      <input id="filter_name" class="form-control" type="text" name="filter[name]" value="<%= filter['name'] %>" />
+                    </div>
+                  </div>
+                </div>
+                <div class="col-md-2 col-lg-2 col-md-offset-5 col-lg-offset-5">
+                  <button class="btn btn-warning pull-right" type='submit'>Filter</button>
+                </div>
+              </div>
+            </form>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+<div class="row">
+  <div class="col-md-12 col-lg-12">
+    <a class="btn btn-primary pull-right" href="/employees/new">
+      New Employee
+    </a>
+  </div>
+</div>
+<hr/>
+<div class="row">
+  <div class="col-md-12 col-lg-12">
+    <div class="table-responsive">
+      <table class="table table-condensed">
+        <thead>
+          <tr>
+            <th>Created At</th>
+            <th>Employee</th>
+            <th>
+              <div class="pull-right">
+                Actions
+              </div>
+            </th>
+          </tr>
+        </thead>
+        <tbody>
+          <% employees.each do |employee| %>
+            <tr>
+              <td>
+                <%= date_time_format(employee.created_at, false) %>
+              </td>
+              <td>
+                <%= employee.name %>
+              </td>
+              <td>
+                <div class="pull-right">
+                  <a class="btn btn-primary btn-sm" href="/employees/<%= employee.id %>">
+                    View
+                  </a>
+                  <a class="btn btn-success btn-sm" href="/employees/<%= employee.id %>/edit">
+                    Edit
+                  </a>
+                  <form action="/employees/<%= employee.id %>" class="btn btn-delete btn-sm" method="post" onsubmit="return confirm('Are you sure?');">
+                    <%= csrf.form_tag %>
+                    <input name="_method" type="hidden" value="delete"></input>
+                    <button class="btn btn-danger btn-sm" type="submit">Delete</button>
+                  </form>
+                </div>
+              </td>
+            </tr>
+          <% end %>
+        </tbody>
+      </table>
+    </div>
+    <a class="btn btn-primary pull-right" href="/employees/new">
+      New Employee
+    </a>
+  </div>
+</div>
+<div class='row'>
+  <div class='col-md-8 col-lg-8 col-md-offset-2 col-lg-offset-2'>
+    <ul class='pager'>
+      <%= display_paginate(url_index:'/employees',page:req.params["page"],pages:employees.pages,filter:filter)%>
+    </ul>
+  </div>
+</div>
+<% content_for :javascripts do %>
+  <% unless filter.empty? %>
+    <script type="text/javascript">
+      $('#collapseOne').addClass('in');
+    </script>
+  <% end %>
+<% end %>

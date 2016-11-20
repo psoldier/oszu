@@ -1,0 +1,6 @@
+**/*.yml
+log/*.log
+log/*.log.*
+tmp/*
+pid/*
+.gs/*
